@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estudio Cierzo | Peluquería en Zaragoza</title>
+<meta name="description" content="Peluquería en el centro de Zaragoza. Corte, color, tratamientos y peinados para novias. Pide cita online en un minuto.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Design tokens. One accent (cobalt), one radius system: 14px surfaces, pill controls. */
+:root {
+  --bg: #f3f3f0;
+  --surface: #ffffff;
+  --surface-2: #e9e9e4;
+  --ink: #15161a;
+  --ink-2: #4a4c55;
+  --line: #d6d6cf;
+  --accent: #2340e8;
+  --accent-ink: #ffffff;
+  --danger: #b3261e;
+  --radius: 14px;
+  --pill: 999px;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --shadow: 0 18px 40px -22px rgb(20 28 80 / .35);
+  --display: "Bricolage Grotesque", "Outfit", system-ui, sans-serif;
+  --body: "Outfit", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1013;
+    --surface: #17181d;
+    --surface-2: #202229;
+    --ink: #eeeee9;
+    --ink-2: #a9abb4;
+    --line: #2b2d36;
+    --accent: #8ea0ff;
+    --accent-ink: #0d1030;
+    --danger: #ff8a80;
+    --shadow: 0 18px 40px -22px rgb(0 0 0 / .8);
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 17px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.05; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+.wrap { width: min(1240px, 100% - 32px); margin-inline: auto; }
+.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font: 600 16px/1 var(--body); white-space: nowrap;
+  padding: 16px 26px; border-radius: var(--pill); border: 1.5px solid transparent;
+  background: var(--accent); color: var(--accent-ink); text-decoration: none; cursor: pointer;
+  transition: transform 160ms var(--ease-out), background-color 160ms ease, border-color 160ms ease;
+}
+.btn:active { transform: scale(0.97); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: scale(0.97); }
+}
+
+/* Nav */
+.nav { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+.brand { font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: -0.03em; text-decoration: none; }
+.nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+.nav ul a { text-decoration: none; font-size: 15px; color: var(--ink-2); transition: color 150ms ease; }
+.nav .btn { padding: 12px 20px; font-size: 15px; }
+@media (hover: hover) and (pointer: fine) { .nav ul a:hover { color: var(--ink); } }
+@media (max-width: 860px) { .nav ul { display: none; } }
+
+/* Hero: asymmetric split */
+.hero { padding: 56px 0 72px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; align-items: center; min-height: calc(100dvh - 68px - 40px); }
+.hero h1 { font-size: clamp(2.6rem, 5vw, 4.5rem); font-weight: 800; }
+.hero h1 em { font-style: italic; font-weight: 600; color: var(--accent); padding-bottom: .08em; display: inline-block; line-height: 1.1; }
+.hero p.lead { margin-top: 22px; max-width: 46ch; font-size: 19px; color: var(--ink-2); }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.hero figure { margin: 0; position: relative; }
+.hero figure img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); background: var(--surface-2); }
+@media (max-width: 860px) {
+  .hero { padding: 32px 0 48px; }
+  .hero .wrap { grid-template-columns: 1fr; gap: 32px; min-height: 0; }
+  .hero figure img { aspect-ratio: 4 / 3; }
+}
+
+/* Sections */
+section { padding: 96px 0; }
+.section-title { font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 800; max-width: 18ch; }
+.section-sub { margin-top: 16px; color: var(--ink-2); max-width: 58ch; }
+@media (max-width: 860px) { section { padding: 64px 0; } }
+
+/* Trust strip (reviews summary, under hero) */
+.trust { padding: 0; }
+.trust .wrap { display: grid; grid-template-columns: repeat(3, 1fr); border-block: 1px solid var(--line); }
+.trust div { padding: 28px 24px; }
+.trust div + div { border-left: 1px solid var(--line); }
+.trust strong { display: block; font-family: var(--display); font-size: 2rem; letter-spacing: -0.03em; }
+.trust span { color: var(--ink-2); font-size: 15px; }
+@media (max-width: 700px) {
+  .trust .wrap { grid-template-columns: 1fr; }
+  .trust div + div { border-left: 0; border-top: 1px solid var(--line); }
+}
+
+/* Services: grouped chunks in 2 columns */
+.services-grid { margin-top: 48px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.svc { background: var(--surface); border-radius: var(--radius); padding: 32px; }
+.svc h3 { font-size: 1.5rem; margin-bottom: 18px; }
+.svc dl { margin: 0; display: grid; gap: 14px; }
+.svc dl div { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; }
+.svc dt { font-weight: 500; }
+.svc dd { margin: 0; color: var(--ink-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.svc small { display: block; margin-top: 20px; color: var(--ink-2); font-size: 14px; }
+.note { margin-top: 20px; color: var(--ink-2); font-size: 14px; }
+@media (max-width: 760px) { .services-grid { grid-template-columns: 1fr; } .svc { padding: 24px; } }
+
+/* Method: bento with visual variety (5 items, 5 cells) */
+.bento { margin-top: 48px; display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: minmax(220px, auto); gap: 16px; }
+.cell { border-radius: var(--radius); padding: 28px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+.cell h3 { font-size: 1.5rem; }
+.cell p { margin-top: 10px; max-width: 40ch; }
+.c1 { grid-column: span 3; grid-row: span 2; color: #fff; background: #111 center / cover; }
+.c1::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgb(8 10 30 / .82), rgb(8 10 30 / .05) 65%); }
+.c1 > * { position: relative; }
+.c2 { grid-column: span 3; background: var(--accent); color: var(--accent-ink); }
+.c3 { grid-column: span 2; background: var(--surface); }
+.c4 { grid-column: span 1; background: var(--surface-2); justify-content: space-between; }
+.c4 strong { font-family: var(--display); font-size: 3rem; letter-spacing: -0.04em; line-height: 1; }
+.c5 { grid-column: span 3; background: var(--surface); }
+@media (max-width: 860px) {
+  .bento { grid-template-columns: 1fr; grid-auto-rows: auto; }
+  .cell, .c1, .c2, .c3, .c4, .c5 { grid-column: auto; grid-row: auto; min-height: 200px; }
+  .c1 { min-height: 320px; }
+}
+
+/* Team: horizontal scroll-snap */
+.team-track { margin-top: 48px; display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; scrollbar-width: thin; }
+.person { flex: 0 0 min(320px, 78%); scroll-snap-align: start; }
+.person img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--radius); background: var(--surface-2); }
+.person h3 { font-size: 1.35rem; margin-top: 16px; }
+.person p { color: var(--ink-2); font-size: 15px; }
+
+/* Testimonial: single big quote */
+.quote { background: var(--surface); }
+.quote blockquote { margin: 0; max-width: 980px; }
+.quote blockquote p { font-family: var(--display); font-size: clamp(1.7rem, 3.4vw, 2.8rem); letter-spacing: -0.02em; line-height: 1.15; font-weight: 600; }
+.quote footer { margin-top: 24px; color: var(--ink-2); }
+.quote footer strong { color: var(--ink); font-weight: 600; }
+.mini { margin-top: 48px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; border-top: 1px solid var(--line); padding-top: 32px; }
+.mini p { color: var(--ink-2); }
+.mini strong { display: block; margin-top: 8px; color: var(--ink); font-weight: 600; font-size: 15px; }
+@media (max-width: 760px) { .mini { grid-template-columns: 1fr; } }
+
+/* Visit: hours + address */
+.visit-grid { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.visit-grid > div { background: var(--surface); border-radius: var(--radius); padding: 32px; }
+.visit-grid h3 { font-size: 1.4rem; margin-bottom: 16px; }
+.hours { display: grid; gap: 8px; margin: 0; }
+.hours div { display: flex; justify-content: space-between; gap: 16px; font-variant-numeric: tabular-nums; }
+.hours dd { margin: 0; color: var(--ink-2); }
+.addr { font-style: normal; color: var(--ink-2); }
+.addr a { color: var(--ink); font-weight: 500; }
+@media (max-width: 760px) { .visit-grid { grid-template-columns: 1fr; } .visit-grid > div { padding: 24px; } }
+
+/* FAQ */
+.faq { max-width: 820px; margin-top: 40px; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; padding: 22px 0; font-weight: 500; font-size: 18px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 24px; line-height: 1; transition: transform 200ms var(--ease-out); }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { padding: 0 0 22px; color: var(--ink-2); max-width: 62ch; }
+
+/* Final CTA */
+.final { background: var(--ink); color: var(--bg); border-radius: var(--radius); padding: 72px 40px; text-align: left; }
+.final h2 { font-size: clamp(2.2rem, 4.6vw, 4rem); font-weight: 800; max-width: 16ch; }
+.final p { margin-top: 18px; max-width: 48ch; opacity: .8; }
+.final .btn { margin-top: 32px; background: var(--bg); color: var(--ink); }
+@media (max-width: 760px) { .final { padding: 44px 24px; } }
+footer.site { padding: 40px 0 56px; color: var(--ink-2); font-size: 14px; }
+footer.site .wrap { display: flex; flex-wrap: wrap; gap: 12px 32px; justify-content: space-between; }
+
+/* Dialog + form */
+dialog { border: 0; padding: 0; background: transparent; width: min(640px, 100% - 24px); max-height: 92dvh; color: var(--ink); overflow: visible; }
+dialog::backdrop { background: rgb(8 9 14 / .62); backdrop-filter: blur(4px); }
+dialog[open] { animation: none; }
+.sheet { background: var(--surface); border-radius: var(--radius); padding: 32px; max-height: 92dvh; overflow-y: auto; box-shadow: var(--shadow); opacity: 1; transform: none; transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out); }
+@starting-style { dialog[open] .sheet { opacity: 0; transform: translateY(12px) scale(0.97); } }
+.sheet h2 { font-size: 2rem; }
+.sheet .close { position: absolute; right: 12px; top: 12px; background: var(--surface-2); color: var(--ink); border: 0; width: 44px; height: 44px; border-radius: var(--pill); font-size: 22px; cursor: pointer; z-index: 1; transition: transform 160ms var(--ease-out); }
+.sheet .close:active { transform: scale(0.94); }
+form { margin-top: 24px; display: grid; gap: 18px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 560px) { .row { grid-template-columns: 1fr; } .sheet { padding: 24px 20px; } }
+.field { display: grid; gap: 8px; }
+.field label { font-weight: 500; font-size: 15px; }
+.field .hint { font-size: 13px; color: var(--ink-2); }
+.field input, .field select, .field textarea {
+  font: 400 16px/1.4 var(--body); color: var(--ink); background: var(--bg);
+  border: 1.5px solid var(--ink-2); border-radius: 10px; padding: 14px; width: 100%;
+  transition: border-color 150ms ease;
+}
+.field textarea { min-height: 92px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: 3px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.field .err { color: var(--danger); font-size: 14px; min-height: 0; }
+.field.invalid input, .field.invalid select { border-color: var(--danger); }
+.check { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--ink-2); }
+.check input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--accent); flex: none; }
+.check.invalid { color: var(--danger); }
+.submit { width: 100%; }
+.btn[disabled] { opacity: .6; cursor: progress; }
+.done { display: none; margin-top: 24px; }
+.done.show { display: block; }
+.done h3 { font-size: 1.7rem; }
+.done dl { margin: 20px 0; display: grid; gap: 8px; background: var(--bg); padding: 20px; border-radius: 10px; }
+.done dl div { display: flex; justify-content: space-between; gap: 16px; }
+.done dd { margin: 0; color: var(--ink-2); text-align: right; }
+.done .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.sheet.sent form { display: none; }
+.sheet.sent .lead-in { display: none; }
+
+/* Scroll reveal: opacity + translate, ease-out. Rare event per element, so 500ms is fine. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out); transition-delay: calc(var(--i, 0) * 60ms); }
+  .reveal.in { opacity: 1; transform: none; }
+  .hero .load { animation: rise 700ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 90ms); }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+  .sheet { transition: opacity 150ms ease; }
+  @starting-style { dialog[open] .sheet { opacity: 0; transform: none; } }
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Estudio Cierzo</a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#metodo">Método</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+        <li><a href="#visitanos">Horarios</a></li>
+        <li><a href="#preguntas">Preguntas</a></li>
+      </ul>
+    </nav>
+    <button class="btn" type="button" data-open-booking>Pedir cita</button>
+  </div>
+</header>
+
+<main id="top">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow load" style="--i:0">Peluquería en Zaragoza</p>
+        <h1 class="load" style="--i:1;margin-top:16px">Corte y color que <em>sientan bien</em>.</h1>
+        <p class="lead load" style="--i:2">Peluquería de autor en el centro de Zaragoza. Te escuchamos, te asesoramos y te vas con un pelo fácil de llevar.</p>
+        <div class="actions load" style="--i:3">
+          <button class="btn" type="button" data-open-booking>Pedir cita</button>
+          <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+        </div>
+      </div>
+      <figure class="load" style="--i:2">
+        <!-- Placeholder photo: replace with a real photo of the salon. -->
+        <img src="https://picsum.photos/seed/estudio-cierzo-salon-hero/900/1125" width="900" height="1125" alt="Interior luminoso del salón con espejos y sillones de peluquería" fetchpriority="high">
+      </figure>
+    </div>
+  </div>
+
+  <!-- Trust strip -->
+  <section class="trust" aria-label="Datos del salón">
+    <div class="wrap">
+      <div class="reveal"><strong>4,9 / 5</strong><span>Valoración media (dato de ejemplo)</span></div>
+      <div class="reveal" style="--i:1"><strong>Desde 2011</strong><span>Trabajando en el centro de Zaragoza</span></div>
+      <div class="reveal" style="--i:2"><strong>Sin prisas</strong><span>Cada cita reserva el tiempo que hace falta</span></div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="servicios">
+    <div class="wrap">
+      <h2 class="section-title reveal">Servicios y precios</h2>
+      <p class="section-sub reveal">Precios orientativos. El precio final se confirma tras la consulta inicial, según largo y densidad.</p>
+      <div class="services-grid">
+        <article class="svc reveal">
+          <h3>Corte y peinado</h3>
+          <dl>
+            <div><dt>Corte mujer</dt><dd>desde 28 €</dd></div>
+            <div><dt>Corte hombre</dt><dd>desde 16 €</dd></div>
+            <div><dt>Corte infantil</dt><dd>desde 12 €</dd></div>
+            <div><dt>Lavado y peinado</dt><dd>desde 18 €</dd></div>
+          </dl>
+        </article>
+        <article class="svc reveal" style="--i:1">
+          <h3>Color</h3>
+          <dl>
+            <div><dt>Tinte de raíz</dt><dd>desde 34 €</dd></div>
+            <div><dt>Mechas o balayage</dt><dd>desde 75 €</dd></div>
+            <div><dt>Matiz y brillo</dt><dd>desde 25 €</dd></div>
+            <div><dt>Corrección de color</dt><dd>con presupuesto</dd></div>
+          </dl>
+          <small>El color de más de dos horas se reserva con cita de mañana.</small>
+        </article>
+        <article class="svc reveal">
+          <h3>Tratamientos</h3>
+          <dl>
+            <div><dt>Hidratación profunda</dt><dd>desde 22 €</dd></div>
+            <div><dt>Keratina alisadora</dt><dd>desde 90 €</dd></div>
+            <div><dt>Tratamiento anticaída</dt><dd>desde 30 €</dd></div>
+          </dl>
+        </article>
+        <article class="svc reveal" style="--i:1">
+          <h3>Novias y eventos</h3>
+          <dl>
+            <div><dt>Prueba de peinado</dt><dd>desde 45 €</dd></div>
+            <div><dt>Peinado de novia</dt><dd>con presupuesto</dd></div>
+            <div><dt>Recogido de invitada</dt><dd>desde 38 €</dd></div>
+          </dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method: bento -->
+  <section id="metodo">
+    <div class="wrap">
+      <h2 class="section-title reveal">Cómo trabajamos</h2>
+      <div class="bento">
+        <article class="cell c1 reveal" style="background-image:url('https://picsum.photos/seed/estudio-cierzo-consulta/1000/900')">
+          <h3>Empezamos por escucharte</h3>
+          <p>Diez minutos de consulta antes de tocar el pelo: qué te gusta, cuánto tiempo le dedicas y qué no quieres repetir.</p>
+        </article>
+        <article class="cell c2 reveal" style="--i:1">
+          <h3>Productos que puedes pronunciar</h3>
+          <p>Trabajamos con marcas profesionales sin amoniaco cuando el color lo permite.</p>
+        </article>
+        <article class="cell c3 reveal" style="--i:2">
+          <h3>Citas con tiempo real</h3>
+          <p>Reservamos el tiempo que necesita tu servicio, sin dobles citas.</p>
+        </article>
+        <article class="cell c4 reveal" style="--i:3">
+          <strong>1:1</strong>
+          <p>Una profesional por cita, de principio a fin.</p>
+        </article>
+        <article class="cell c5 reveal" style="--i:1">
+          <h3>Te enseñamos a peinarte en casa</h3>
+          <p>Al terminar te explicamos cómo repetir el peinado y qué producto usar, sin obligarte a comprar nada.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="equipo">
+    <div class="wrap">
+      <h2 class="section-title reveal">El equipo</h2>
+      <div class="team-track" tabindex="0" aria-label="Equipo, desliza para ver más">
+        <article class="person"><img src="https://picsum.photos/seed/estudio-cierzo-marta/600/800" width="600" height="800" alt="Retrato de Marta Lasheras" loading="lazy"><h3>Marta Lasheras</h3><p>Fundadora. Corte y color.</p></article>
+        <article class="person"><img src="https://picsum.photos/seed/estudio-cierzo-ines/600/800" width="600" height="800" alt="Retrato de Inés Bernad" loading="lazy"><h3>Inés Bernad</h3><p>Rubios, balayage y correcciones.</p></article>
+        <article class="person"><img src="https://picsum.photos/seed/estudio-cierzo-hugo/600/800" width="600" height="800" alt="Retrato de Hugo Tornos" loading="lazy"><h3>Hugo Tornos</h3><p>Corte masculino y barba.</p></article>
+        <article class="person"><img src="https://picsum.photos/seed/estudio-cierzo-noelia/600/800" width="600" height="800" alt="Retrato de Noelia Casbas" loading="lazy"><h3>Noelia Casbas</h3><p>Novias, recogidos y eventos.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="quote">
+    <div class="wrap">
+      <blockquote class="reveal">
+        <p>"Llevaba años huyendo de las peluquerías. Aquí me preguntaron primero cómo me peino de verdad y salí con un corte que me dura seis semanas."</p>
+        <footer><strong>Cristina Aznar</strong>, clienta desde 2019 (reseña de ejemplo)</footer>
+      </blockquote>
+      <div class="mini">
+        <div class="reveal"><p>"El balayage quedó justo como la foto que llevé. Nada de naranjas."</p><strong>Paula Sanz, clienta</strong></div>
+        <div class="reveal" style="--i:1"><p>"Nos peinaron a las cinco de mi boda y llegamos a la iglesia con tiempo."</p><strong>Elena Mur, novia</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visit -->
+  <section id="visitanos">
+    <div class="wrap">
+      <h2 class="section-title reveal">Horarios y dónde estamos</h2>
+      <div class="visit-grid">
+        <div class="reveal">
+          <h3>Horario</h3>
+          <dl class="hours">
+            <div><dt>Martes a viernes</dt><dd>9:30 a 20:00</dd></div>
+            <div><dt>Sábado</dt><dd>9:00 a 15:00</dd></div>
+            <div><dt>Domingo y lunes</dt><dd>Cerrado</dd></div>
+          </dl>
+        </div>
+        <div class="reveal" style="--i:1">
+          <h3>Contacto</h3>
+          <address class="addr">
+            Calle de Ejemplo, 12, 50003 Zaragoza<br>
+            A cinco minutos de la plaza del Pilar<br>
+            <a href="tel:+34976000000">976 00 00 00</a><br>
+            <a href="mailto:hola@estudiocierzo.example">hola@estudiocierzo.example</a>
+          </address>
+        </div>
+      </div>
+      <p class="note reveal">Dirección, teléfono y horario son datos de ejemplo. Sustitúyelos por los reales antes de publicar.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="preguntas">
+    <div class="wrap">
+      <h2 class="section-title reveal">Preguntas frecuentes</h2>
+      <div class="faq reveal">
+        <details><summary>¿Puedo cambiar o anular mi cita?</summary><p>Sí. Avísanos con 24 horas de antelación por teléfono o WhatsApp y la movemos sin coste.</p></details>
+        <details><summary>¿Cuánto dura un servicio de color?</summary><p>Un tinte de raíz suele llevar 1 hora y media. Mechas o balayage, entre 2 y 4 horas según el punto de partida.</p></details>
+        <details><summary>¿Hace falta consulta previa para cambiar de color?</summary><p>Para cambios grandes recomendamos una consulta rápida y gratuita de diez minutos. Puedes indicarlo en el formulario.</p></details>
+        <details><summary>¿Se puede pagar con tarjeta?</summary><p>Sí, con tarjeta, Bizum y efectivo.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section style="padding-top:0" id="cita">
+    <div class="wrap">
+      <div class="final reveal">
+        <h2>Reserva tu cita</h2>
+        <p>Rellena el formulario con tus datos y el servicio que quieres. Te confirmamos la hora en menos de un día laborable.</p>
+        <button class="btn" type="button" data-open-booking>Rellenar formulario</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>Estudio Cierzo. Peluquería en Zaragoza.</span>
+    <span>Página de demostración: el salón, las personas y los datos son ficticios.</span>
+  </div>
+</footer>
+
+<!-- Booking dialog -->
+<dialog id="booking" aria-labelledby="booking-title">
+  <div class="sheet" id="sheet">
+    <button class="close" type="button" aria-label="Cerrar formulario" data-close>&times;</button>
+    <h2 id="booking-title">Pide tu cita</h2>
+    <p class="lead-in" style="color:var(--ink-2);margin-top:8px">Cuéntanos qué necesitas y cuándo te va bien. Los campos con asterisco son obligatorios.</p>
+
+    <form id="form" novalidate>
+      <div class="row">
+        <div class="field">
+          <label for="nombre">Nombre y apellidos *</label>
+          <input id="nombre" name="nombre" type="text" autocomplete="name" required aria-describedby="nombre-err">
+          <span class="err" id="nombre-err" role="alert"></span>
+        </div>
+        <div class="field">
+          <label for="telefono">Teléfono *</label>
+          <input id="telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="telefono-err telefono-hint">
+          <span class="hint" id="telefono-hint">Para confirmarte la hora.</span>
+          <span class="err" id="telefono-err" role="alert"></span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="email">Correo electrónico *</label>
+        <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-err">
+        <span class="err" id="email-err" role="alert"></span>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="servicio">Servicio *</label>
+          <select id="servicio" name="servicio" required aria-describedby="servicio-err">
+            <option value="">Elige un servicio</option>
+            <option>Corte mujer</option>
+            <option>Corte hombre</option>
+            <option>Corte infantil</option>
+            <option>Lavado y peinado</option>
+            <option>Tinte de raíz</option>
+            <option>Mechas o balayage</option>
+            <option>Corrección de color</option>
+            <option>Tratamiento</option>
+            <option>Novia o evento</option>
+            <option>No lo sé, necesito consulta</option>
+          </select>
+          <span class="err" id="servicio-err" role="alert"></span>
+        </div>
+        <div class="field">
+          <label for="profesional">Profesional</label>
+          <select id="profesional" name="profesional">
+            <option value="Sin preferencia">Sin preferencia</option>
+            <option>Marta Lasheras</option>
+            <option>Inés Bernad</option>
+            <option>Hugo Tornos</option>
+            <option>Noelia Casbas</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="fecha">Fecha preferida *</label>
+          <input id="fecha" name="fecha" type="date" required aria-describedby="fecha-err">
+          <span class="err" id="fecha-err" role="alert"></span>
+        </div>
+        <div class="field">
+          <label for="franja">Franja horaria *</label>
+          <select id="franja" name="franja" required aria-describedby="franja-err">
+            <option value="">Elige una franja</option>
+            <option>Mañana (9:30 a 13:30)</option>
+            <option>Mediodía (13:30 a 16:30)</option>
+            <option>Tarde (16:30 a 20:00)</option>
+          </select>
+          <span class="err" id="franja-err" role="alert"></span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="notas">Comentarios</label>
+        <textarea id="notas" name="notas" aria-describedby="notas-hint"></textarea>
+        <span class="hint" id="notas-hint">Largo actual, alergias, color de referencia. Opcional.</span>
+      </div>
+      <label class="check" id="check-legal">
+        <input type="checkbox" id="legal" name="legal" required>
+        <span>Acepto que Estudio Cierzo use estos datos para gestionar mi cita, según su política de privacidad. *</span>
+      </label>
+      <button class="btn submit" type="submit" id="submit">Solicitar cita</button>
+    </form>
+
+    <div class="done" id="done" aria-live="polite">
+      <h3>Solicitud lista</h3>
+      <p style="color:var(--ink-2);margin-top:8px">Revisa el resumen y envíanoslo por el canal que prefieras. La cita queda confirmada cuando te respondamos.</p>
+      <dl id="summary"></dl>
+      <div class="actions">
+        <a class="btn" id="wa" href="#" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+        <a class="btn btn-ghost" id="mail" href="#">Enviar por correo</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var dlg = document.getElementById('booking');
+  var sheet = document.getElementById('sheet');
+  var form = document.getElementById('form');
+  var done = document.getElementById('done');
+  var submitBtn = document.getElementById('submit');
+  var opener = null;
+
+  // Example contact data. Replace before publishing.
+  var SALON_WA = '34600000000';
+  var SALON_MAIL = 'hola@estudiocierzo.example';
+
+  // Earliest bookable date: tomorrow.
+  var d = new Date(); d.setDate(d.getDate() + 1);
+  document.getElementById('fecha').min = d.toISOString().slice(0, 10);
+
+  function openBooking(e) {
+    opener = e.currentTarget;
+    sheet.classList.remove('sent'); done.classList.remove('show');
+    dlg.showModal();
+    document.getElementById('nombre').focus();
+  }
+  document.querySelectorAll('[data-open-booking]').forEach(function (b) { b.addEventListener('click', openBooking); });
+  dlg.querySelector('[data-close]').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener('close', function () { if (opener) opener.focus(); });
+
+  function setError(id, msg) {
+    var f = document.getElementById(id);
+    var box = f.closest('.field');
+    document.getElementById(id + '-err').textContent = msg || '';
+    box.classList.toggle('invalid', !!msg);
+    f.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    return !msg;
+  }
+  function validate() {
+    var ok = true, v = function (id) { return document.getElementById(id).value.trim(); };
+    ok = setError('nombre', v('nombre').length < 3 ? 'Escribe tu nombre y apellidos.' : '') && ok;
+    ok = setError('telefono', !/^(\+34)?[\s-]?[6789]\d{2}[\s-]?\d{3}[\s-]?\d{3}$/.test(v('telefono')) ? 'Escribe un teléfono español válido, por ejemplo 600 123 456.' : '') && ok;
+    ok = setError('email', !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('email')) ? 'Escribe un correo válido.' : '') && ok;
+    ok = setError('servicio', !v('servicio') ? 'Elige un servicio.' : '') && ok;
+    var fecha = v('fecha');
+    ok = setError('fecha', !fecha ? 'Elige una fecha.' : (fecha < document.getElementById('fecha').min ? 'Elige una fecha a partir de mañana.' : '')) && ok;
+    ok = setError('franja', !v('franja') ? 'Elige una franja horaria.' : '') && ok;
+    var legal = document.getElementById('legal');
+    document.getElementById('check-legal').classList.toggle('invalid', !legal.checked);
+    ok = legal.checked && ok;
+    return ok;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validate()) { var first = form.querySelector('.invalid input, .invalid select, .check.invalid input'); if (first) first.focus(); return; }
+    submitBtn.disabled = true; submitBtn.textContent = 'Preparando...';
+    var data = new FormData(form);
+    var rows = [['Nombre', data.get('nombre')], ['Teléfono', data.get('telefono')], ['Correo', data.get('email')], ['Servicio', data.get('servicio')], ['Profesional', data.get('profesional')], ['Fecha', data.get('fecha')], ['Franja', data.get('franja')]];
+    if ((data.get('notas') || '').trim()) rows.push(['Comentarios', data.get('notas')]);
+    var summary = document.getElementById('summary'); summary.innerHTML = '';
+    var text = 'Hola, quiero pedir cita en Estudio Cierzo:\n';
+    rows.forEach(function (r) {
+      var div = document.createElement('div'), dt = document.createElement('dt'), dd = document.createElement('dd');
+      dt.textContent = r[0]; dd.textContent = r[1]; div.appendChild(dt); div.appendChild(dd); summary.appendChild(div);
+      text += r[0] + ': ' + r[1] + '\n';
+    });
+    document.getElementById('wa').href = 'https://wa.me/' + SALON_WA + '?text=' + encodeURIComponent(text);
+    document.getElementById('mail').href = 'mailto:' + SALON_MAIL + '?subject=' + encodeURIComponent('Solicitud de cita') + '&body=' + encodeURIComponent(text);
+    // No backend: the request is handed to WhatsApp or email.
+    setTimeout(function () {
+      sheet.classList.add('sent'); done.classList.add('show');
+      submitBtn.disabled = false; submitBtn.textContent = 'Solicitar cita';
+      done.querySelector('h3').setAttribute('tabindex', '-1'); done.querySelector('h3').focus();
+    }, 350);
+  });
+
+  // Scroll reveal via IntersectionObserver (no scroll listeners).
+  var items = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.15 });
+    items.forEach(function (el) { io.observe(el); });
+  } else {
+    items.forEach(function (el) { el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>
